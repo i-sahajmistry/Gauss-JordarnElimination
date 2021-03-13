@@ -15,7 +15,6 @@ protected:
     pair<int, int> lastPivote;
 public:
     void setMatrix();
-    void takeZeroRowsDown();
     void findNextPivote();
     void takePivoteRowAbove(pair<int, int>);
     void makeBelowPivoteZero(pair<int, int>);
@@ -66,46 +65,6 @@ void ToREF :: setMatrix()
         matrix.push_back(temp);
     }
     
-}
-
-void ToREF :: takeZeroRowsDown()
-{
-    cout << endl << "Take all zero rows down" << endl << endl;
-    vector<int> zeroRows;
-    for(int i = 0; i < n; i++)
-    {
-        float rowElements[m];
-        for(int j = 0; j < m; j++)
-        {
-            rowElements[j] = matrix[i][j];
-        }
-
-        bool flag = true;
-        for(int i = 0; i < m; i++)
-        {
-            if(rowElements[i] != 0)
-            {
-                flag = false;
-                break;
-            }
-        }
-
-        if(flag == true)
-        {
-            zeroRows.push_back(i);
-        }
-    }
-
-    int x = zeroRows.size();
-    for(int i = x - 1; i >= 0 ; i--)
-    {
-        for(int j = 0; j < m; j++)
-        {
-            float temp = matrix[zeroRows[i]][j];
-            matrix[zeroRows[i]][j] = matrix[(n) - (x - i)][j];
-            matrix[(n) - (x - i)][j] = temp;
-        }
-    }
 }
 
 void ToREF :: findNextPivote()
@@ -233,7 +192,6 @@ void ToREF :: display()
 void ToREF :: makeREF()
 {
     cout << endl <<"Convert to REF" << endl;
-    takeZeroRowsDown();
 
     do
     {
